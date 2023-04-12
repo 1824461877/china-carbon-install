@@ -1,0 +1,22 @@
+app_server:
+  email:
+    name: "wren_email"
+    mail_username: "1824461877@qq.com"
+    authorization_code: "whptgdvifoyybegi"
+    tls: "smtp.qq.com:465"
+    host: "smtp.qq.com"
+    template: "
+      <p style='font-weight:600'>亲爱的用户：</p> 
+      您好！感谢您使用 wren 服务，您的账号正在进行邮箱验证，本次请求的验证码为：
+    "
+
+  phone:
+    name: "wren_phone"
+    source: "aliyun.com"
+    endpoint: "dysmsapi.aliyuncs.com"
+    access_user:
+      access_key_id: "LTAI5t6Fczd92M5wc34nNWt7"
+      access_key_secret: "WoXTpljI0GUFTvlfQNlj4NiHwr5ZOX"
+    sms:
+      sign_name: "阿里云短信测试"
+      template_code: "SMS_154950909"

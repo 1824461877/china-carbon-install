@@ -1,0 +1,29 @@
+# This is base config
+base:
+  time_location: "Asia/Chongqing"
+
+server:
+  name: "rwen-back-server"
+  tls: false
+  addr: "127.0.0.1:8880"
+  read_timeout: 10
+  write_timeout: 10
+  max_header_bytes: 10
+  cert:
+    cert_file: "./cert/cert.pem"
+    key_file: "./cert/private.key"
+  allow_ip:
+    - "127.0.0.1"
+    - "192.168.1.1"
+
+log:
+  log_mode: "zap"
+  server_log: "./logs/app.log"
+  max_size: 1
+  max_backups: 5
+  max_age: 30
+  compress: true
+  local_time: true
+
+authorization:
+    jwt_sign_key: "5mVuQd8rN8p9sMWpXZKhZGpVmRaO71HEzclKpgL"

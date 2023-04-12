@@ -1,0 +1,10 @@
+server:
+  name: "redis"
+  open: true
+  addr:
+    - "192.168.60.140:6369"
+  password: "1234567"
+  db: 0
+  max_active: 100
+  max_idle: 100
+  down_grade: false

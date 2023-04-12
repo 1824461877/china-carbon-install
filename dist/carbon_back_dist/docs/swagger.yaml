@@ -1,0 +1,501 @@
+definitions:
+  middleware.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      errmsg:
+        type: string
+    type: object
+  model.Admin:
+    properties:
+      cell_phone_number:
+        type: string
+      password:
+        type: string
+      verification_code:
+        type: string
+    type: object
+  model.AdminBindEmail:
+    properties:
+      code:
+        type: string
+      email:
+        type: string
+    type: object
+  model.AdminFoundationInfo:
+    properties:
+      admin_info:
+        $ref: '#/definitions/model.AdminInfo'
+      avatar:
+        type: string
+      email:
+        type: string
+      introduction:
+        type: string
+      name:
+        type: string
+    type: object
+  model.AdminFoundationUserInfo:
+    properties:
+      avatar:
+        type: string
+      introduction:
+        type: string
+      name:
+        type: string
+    type: object
+  model.AdminInfo:
+    properties:
+      cell_phone_number:
+        type: string
+      password:
+        type: string
+    type: object
+  model.AdminLoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  model.AdminLoginOutput:
+    properties:
+      token:
+        type: string
+    type: object
+  model.AdminNewCellPhone:
+    properties:
+      new_cell_phone_number:
+        type: string
+      new_verification_code:
+        type: string
+      old_cell_phone_number:
+        type: string
+      old_verification_code:
+        type: string
+    type: object
+  model.AdminNewPassword:
+    properties:
+      new_password:
+        type: string
+      old_password:
+        type: string
+    type: object
+  model.AdminUpdateNewEmail:
+    properties:
+      email_verification_code:
+        type: string
+      new_email:
+        type: string
+      verification_code:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /admin/admin_bind_email:
+    post:
+      consumes:
+      - application/json
+      description: 用户绑定邮箱
+      operationId: /admin/admin_bind_email
+      parameters:
+      - description: Enter the user's basic information update
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminBindEmail'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户绑定邮箱
+      tags:
+      - 用户接口
+  /admin/admin_email_verification_code:
+    get:
+      consumes:
+      - application/json
+      description: 邮箱验证码
+      operationId: /admin/admin_email_verification_code
+      parameters:
+      - description: 邮箱地址
+        in: query
+        name: email
+        required: true
+        type: string
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 邮箱验证码
+      tags:
+      - 用户接口
+  /admin/admin_email_verification_code_confirmation:
+    get:
+      consumes:
+      - application/json
+      description: 用户验证码确认
+      operationId: /admin/admin_email_verification_code_confirmation
+      parameters:
+      - description: 验证码
+        in: query
+        name: verification_code
+        required: true
+        type: string
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户验证码确认
+      tags:
+      - 用户接口
+  /admin/admin_info:
+    get:
+      consumes:
+      - application/json
+      description: 用户信息
+      operationId: /admin/admin_info
+      parameters:
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AdminFoundationInfo'
+              type: object
+      summary: 用户信息
+      tags:
+      - 用户接口
+  /admin/admin_phone_verification_code_confirmation:
+    get:
+      consumes:
+      - application/json
+      description: 用户验证码确认
+      operationId: /admin/admin_phone_verification_code_confirmation
+      parameters:
+      - description: 验证码
+        in: query
+        name: verification_code
+        required: true
+        type: string
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户验证码确认
+      tags:
+      - 用户接口
+  /admin/admin_set:
+    post:
+      consumes:
+      - application/json
+      description: 用户基础信息设置
+      operationId: /admin/admin_set
+      parameters:
+      - description: Enter the user's basic information
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminFoundationUserInfo'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户基础信息设置
+      tags:
+      - 用户接口
+  /admin/admin_update:
+    post:
+      consumes:
+      - application/json
+      description: 用户基础信息更新
+      operationId: /admin/admin_update
+      parameters:
+      - description: Enter the user's basic information update
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminFoundationUserInfo'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户基础信息更新
+      tags:
+      - 用户接口
+  /admin/admin_update_cell_phone:
+    post:
+      consumes:
+      - application/json
+      description: 用户更新手机号
+      operationId: /admin/admin_update_cell_phone
+      parameters:
+      - description: Replace the user's current phone number with a new phone number
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminNewCellPhone'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户更新手机号
+      tags:
+      - 用户接口
+  /admin/admin_update_email:
+    post:
+      consumes:
+      - application/json
+      description: 用户更新邮箱
+      operationId: /admin/admin_update_email
+      parameters:
+      - description: Replace the user's current email with a new email
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminUpdateNewEmail'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户更新邮箱
+      tags:
+      - 用户接口
+  /admin/admin_update_password:
+    post:
+      consumes:
+      - application/json
+      description: 用户修改密码
+      operationId: /admin/admin_update_password
+      parameters:
+      - description: Replace the user's current password with a new one
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminNewPassword'
+      - description: The token returned from the login interface needs to be set
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户修改密码
+      tags:
+      - 用户接口
+  /admin_s/admin_login_in:
+    post:
+      consumes:
+      - application/json
+      description: 用户登录
+      operationId: /admin_s/admin_login_in
+      parameters:
+      - description: Enter your phone number and password to log in
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminLoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/model.AdminLoginOutput'
+              type: object
+      summary: 用户登录
+      tags:
+      - 用户接口
+  /admin_s/admin_phone_verification_code:
+    get:
+      consumes:
+      - application/json
+      description: 用户验证码
+      operationId: /admin_s/admin_phone_verification_code
+      parameters:
+      - description: 手机号
+        in: query
+        name: cell_phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户验证码
+      tags:
+      - 用户接口
+  /admin_s/admin_register:
+    post:
+      consumes:
+      - application/json
+      description: 用户注册
+      operationId: /admin_s/admin_register
+      parameters:
+      - description: Enter registration related information
+        in: body
+        name: polygon
+        required: true
+        schema:
+          $ref: '#/definitions/model.Admin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: success
+          schema:
+            allOf:
+            - $ref: '#/definitions/middleware.Response'
+            - properties:
+                data:
+                  type: string
+              type: object
+      summary: 用户注册
+      tags:
+      - 用户接口
+swagger: "2.0"

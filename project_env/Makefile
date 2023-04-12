@@ -1,11 +1,3 @@
-.PHONY: build
-build:
-	go build -o rwen *.go
-
-.PHONY: run
-run:
-	./rwen --config ./conf/dev
-
 .PHONY: server_env_up
 server_env_up:
 	docker compose -f docker-compose.yml up -d
